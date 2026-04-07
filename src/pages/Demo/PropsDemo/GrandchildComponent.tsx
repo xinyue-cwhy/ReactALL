@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FC } from 'react'
 
 const { Text } = Typography
 
@@ -6,7 +6,7 @@ export interface GrandchildProps {
   value: string
 }
 
-const GrandchildComponent: React.FC<GrandchildProps> = ({ value }) => (
+const GrandchildComponent: FC<GrandchildProps> = ({ value }) => (
   <Card
     title="孙子组件 (GrandchildComponent)"
     size="small"

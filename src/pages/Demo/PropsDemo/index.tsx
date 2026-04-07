@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ChildComponent from "./ChildComponent";
 import GrandchildComponent from "./GrandchildComponent";
 
@@ -68,6 +68,12 @@ const PropsDemo: React.FC = () => {
               <ChildComponent
                 message={message}
                 count={count}
+                renderCount={() => (
+                  <>
+                    <Text>当前 count是 </Text>
+                    <Text strong>{count}</Text>
+                  </>
+                )}
                 onCountChange={setCount}
                 onSendMessage={setFromChild}
               />

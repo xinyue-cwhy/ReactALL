@@ -1,12 +1,14 @@
+import type { FC, ReactNode, Dispatch, SetStateAction } from "react";
+
 interface SlotDemoProps {
   // 可以定义一些 props 来控制插槽内容
   title?: string;
   description?: string;
   constFather: number;
-  setConstFather: React.Dispatch<React.SetStateAction<number>>;
-  renderContent?: (count: number) => React.ReactNode; // 可选：父组件传入渲染函数
+  setConstFather: Dispatch<SetStateAction<number>>;
+  renderContent?: (count: number) => ReactNode; // 可选：父组件传入渲染函数
 }
-const SlotDemo: React.FC<SlotDemoProps> = ({
+const SlotDemo: FC<SlotDemoProps> = ({
   title,
   description,
   constFather,

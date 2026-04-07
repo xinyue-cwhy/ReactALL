@@ -5,7 +5,7 @@ const fetchMessage = () => {
     }, 2000);
   });
 };
-const AsyncChild = ({ messagePromise }) => {
+const AsyncChild = ({ messagePromise }: { messagePromise: Promise<string> }) => {
   // 状态
   //   const [message, setMessage] = useState<string | null>(null);
   // 副作用

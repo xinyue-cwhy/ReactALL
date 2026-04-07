@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppDispatch'
 import {
   increment, decrement, incrementByAmount, reset, setStep,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from "react";
 import { useQuery } from '@tanstack/react-query'
 import { getUsers, getPostsByUser, getTodos } from '../../../api/user'
 import type { Post, Todo } from '../../../types'

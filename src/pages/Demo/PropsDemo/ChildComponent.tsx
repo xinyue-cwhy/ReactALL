@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import type { FC, ReactNode } from "react";
 import SlotDemo from "./SlotDemo";
 
 const { Text } = Typography;
@@ -6,12 +6,12 @@ const { Text } = Typography;
 export interface ChildProps {
   message: string; // 父 -> 子: props
   count: number;
-  renderCount?: () => React.ReactNode; // 可选：父组件传入渲染函数
+  renderCount?: () => ReactNode; // 可选：父组件传入渲染函数
   onCountChange: (n: number) => void; // 子 -> 父: 回调
   onSendMessage: (msg: string) => void;
 }
 
-const ChildComponent: React.FC<ChildProps> = ({
+const ChildComponent: FC<ChildProps> = ({
   message,
   count,
   renderCount,
@@ -20,6 +20,12 @@ const ChildComponent: React.FC<ChildProps> = ({
 }) => {
   const [input, setInput] = useState("");
   const [constFather, setConstFather] = useState(0);
+  function countChangeHandle(params: number) {
+    if (params > 10 || params < 0) {
+      return;
+    }
+    onCountChange(params);
+  }
   return (
     <Card
       title={
@@ -78,8 +84,10 @@ const ChildComponent: React.FC<ChildProps> = ({
         <Divider dashed>子 → 父：通过回调函数</Divider>
 
         <Space>
-          <Button onClick={() => onCountChange(count - 1)}>count - 1</Button>
-          <Button type="primary" onClick={() => onCountChange(count + 1)}>
+          <Button onClick={() => countChangeHandle(count - 1)}>
+            count - 1
+          </Button>
+          <Button type="primary" onClick={() => countChangeHandle(count + 1)}>
             count + 1
           </Button>
         </Space>

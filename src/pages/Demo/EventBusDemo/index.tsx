@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import type { FC, ReactNode } from "react";
 import emitter from '../../../utils/eventBus'
 
 const { Title, Text, Paragraph } = Typography
@@ -50,7 +50,7 @@ const PublisherA: React.FC = () => {
   )
 }
 
-const Divider: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
+const Divider: FC<{ children?: ReactNode }> = ({ children }) => (
   <div style={{ borderTop: '1px dashed #d9d9d9', margin: '8px 0', textAlign: 'center', position: 'relative' }}>
     <span style={{ background: '#fff', padding: '0 8px', color: '#999', fontSize: 12, position: 'relative', top: -10 }}>
       {children}

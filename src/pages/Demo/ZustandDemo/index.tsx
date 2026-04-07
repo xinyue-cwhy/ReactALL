@@ -1,4 +1,3 @@
-import React from 'react'
 import { useCartStore } from './store'
 import type { ColumnsType } from 'antd/es/table'
 

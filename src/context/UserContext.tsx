@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import type { FC, ReactNode } from 'react'
 import type { User } from '../types'
 
 interface UserState {
@@ -37,7 +37,7 @@ const UserContext = createContext<UserContextType>({
   logout: () => {},
 })
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState)
 
   const login = (user: User) => dispatch({ type: 'LOGIN', payload: user })

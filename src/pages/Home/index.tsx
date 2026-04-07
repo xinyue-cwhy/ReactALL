@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const { Title, Paragraph, Text } = Typography;
@@ -67,6 +66,14 @@ const demos = [
     desc: "React 18 Suspense 组件，配合 lazy 和 Suspense 实现组件级别的加载状态。",
     tags: ["Suspense", "lazy", "fallback"],
     color: "#fff7e6",
+  },
+  {
+    key: "/demo/form",
+    icon: <FunctionOutlined style={{ fontSize: 32, color: "#2f54eb" }} />,
+    title: "受控表单",
+    desc: "使用 useState 管理表单数据，提交时统一校验，输入时实时清除错误提示。",
+    tags: ["useState", "受控组件", "表单校验"],
+    color: "#f0f5ff",
   },
 ];
 

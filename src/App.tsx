@@ -1,4 +1,3 @@
-import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -19,7 +18,7 @@ const queryClient = new QueryClient({
 })
 
 // 内部组件：读取 ThemeContext 配置 Ant Design
-const ThemedApp: React.FC = () => {
+const ThemedApp = () => {
   const { theme: appTheme, primaryColor } = useTheme()
 
   return (
@@ -37,7 +36,7 @@ const ThemedApp: React.FC = () => {
   )
 }
 
-const App: React.FC = () => (
+const App = () => (
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>

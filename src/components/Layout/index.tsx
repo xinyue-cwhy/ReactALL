@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { theme } from "antd";
 import { useTheme } from "../../context/ThemeContext";
@@ -53,6 +53,11 @@ const menuItems = [
         icon: <FunctionOutlined />,
         label: "React Suspense",
       },
+      {
+        key: "/demo/form",
+        icon: <FunctionOutlined />,
+        label: "受控表单",
+      },
     ],
   },
 ];
@@ -67,6 +72,7 @@ const breadcrumbMap: Record<string, string> = {
   "/demo/eventbus": "EventBus 发布订阅",
   "/demo/query": "React Query + Axios",
   "/demo/suspense": "React Suspense",
+  "/demo/form": "受控表单",
 };
 
 const AppLayout: React.FC = () => {
