@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react";
+import type { FC, ReactNode } from 'react'
 import emitter from '../../../utils/eventBus'
 
 const { Title, Text, Paragraph } = Typography
@@ -19,7 +19,11 @@ const PublisherA: React.FC = () => {
 
   return (
     <Card
-      title={<><SendOutlined /> 发布者 A</>}
+      title={
+        <>
+          <SendOutlined /> 发布者 A
+        </>
+      }
       style={{ border: '2px solid #1677ff', borderRadius: 8 }}
     >
       <Space direction="vertical" style={{ width: '100%' }}>
@@ -30,12 +34,19 @@ const PublisherA: React.FC = () => {
             onChange={(e) => setMsg(e.target.value)}
             onPressEnter={send}
           />
-          <Button type="primary" icon={<SendOutlined />} onClick={send}>发布</Button>
+          <Button type="primary" icon={<SendOutlined />} onClick={send}>
+            发布
+          </Button>
         </Space.Compact>
 
         <Divider>发布通知事件</Divider>
         <Space wrap>
-          <Button size="small" type="primary" ghost onClick={() => notify('success')}>
+          <Button
+            size="small"
+            type="primary"
+            ghost
+            onClick={() => notify('success')}
+          >
             发布 success
           </Button>
           <Button size="small" danger ghost onClick={() => notify('error')}>
@@ -51,8 +62,24 @@ const PublisherA: React.FC = () => {
 }
 
 const Divider: FC<{ children?: ReactNode }> = ({ children }) => (
-  <div style={{ borderTop: '1px dashed #d9d9d9', margin: '8px 0', textAlign: 'center', position: 'relative' }}>
-    <span style={{ background: '#fff', padding: '0 8px', color: '#999', fontSize: 12, position: 'relative', top: -10 }}>
+  <div
+    style={{
+      borderTop: '1px dashed #d9d9d9',
+      margin: '8px 0',
+      textAlign: 'center',
+      position: 'relative'
+    }}
+  >
+    <span
+      style={{
+        background: '#fff',
+        padding: '0 8px',
+        color: '#999',
+        fontSize: 12,
+        position: 'relative',
+        top: -10
+      }}
+    >
       {children}
     </span>
   </div>
@@ -69,7 +96,7 @@ const SubscriberB: React.FC = () => {
       setUnread((n) => n + 1)
     }
     emitter.on('message', handler)
-    return () => emitter.off('message', handler)  // 组件卸载时取消订阅
+    return () => emitter.off('message', handler) // 组件卸载时取消订阅
   }, [])
 
   return (
@@ -82,12 +109,16 @@ const SubscriberB: React.FC = () => {
       style={{ border: '2px solid #52c41a', borderRadius: 8 }}
     >
       <Space direction="vertical" style={{ width: '100%' }}>
-        <Button size="small" onClick={() => setUnread(0)}>标为已读</Button>
+        <Button size="small" onClick={() => setUnread(0)}>
+          标为已读
+        </Button>
         <List
           size="small"
           dataSource={messages}
           renderItem={(item, i) => (
-            <List.Item><Tag color="blue">#{i + 1}</Tag> {item}</List.Item>
+            <List.Item>
+              <Tag color="blue">#{i + 1}</Tag> {item}
+            </List.Item>
           )}
           locale={{ emptyText: '等待接收消息...' }}
           style={{ maxHeight: 200, overflowY: 'auto' }}
@@ -99,10 +130,15 @@ const SubscriberB: React.FC = () => {
 
 // ============ 订阅者组件 C ============
 const SubscriberC: React.FC = () => {
-  const [notifications, setNotifications] = useState<Array<{ type: string; content: string }>>([])
+  const [notifications, setNotifications] = useState<
+    Array<{ type: string; content: string }>
+  >([])
 
   useEffect(() => {
-    const handler = (data: { type: 'success' | 'error' | 'info'; content: string }) => {
+    const handler = (data: {
+      type: 'success' | 'error' | 'info'
+      content: string
+    }) => {
       setNotifications((prev) => [...prev, data])
     }
     emitter.on('notify', handler)
@@ -111,7 +147,11 @@ const SubscriberC: React.FC = () => {
 
   return (
     <Card
-      title={<><NotificationOutlined /> 订阅者 C（notify 事件）</>}
+      title={
+        <>
+          <NotificationOutlined /> 订阅者 C（notify 事件）
+        </>
+      }
       style={{ border: '2px solid #fa8c16', borderRadius: 8 }}
     >
       <List
@@ -119,7 +159,12 @@ const SubscriberC: React.FC = () => {
         dataSource={notifications}
         renderItem={(item) => (
           <List.Item>
-            <Alert message={item.content} type={item.type as 'success' | 'error' | 'info'} showIcon style={{ width: '100%', padding: '2px 8px' }} />
+            <Alert
+              message={item.content}
+              type={item.type as 'success' | 'error' | 'info'}
+              showIcon
+              style={{ width: '100%', padding: '2px 8px' }}
+            />
           </List.Item>
         )}
         locale={{ emptyText: '等待接收通知...' }}
@@ -134,21 +179,32 @@ const EventBusDemo: React.FC = () => (
   <div>
     <Title level={3}>EventBus 发布订阅</Title>
     <Paragraph>
-      基于 <Text code>mitt</Text> 实现事件总线，兄弟组件间解耦通信，无需公共父组件传递。
-      <Tag color="cyan" style={{ marginLeft: 8 }}>emit</Tag>
+      基于 <Text code>mitt</Text>{' '}
+      实现事件总线，兄弟组件间解耦通信，无需公共父组件传递。
+      <Tag color="cyan" style={{ marginLeft: 8 }}>
+        emit
+      </Tag>
       <Tag color="cyan">on</Tag>
       <Tag color="cyan">off</Tag>
     </Paragraph>
 
     <Alert
       message="发布者 A 和订阅者 B/C 没有父子关系，通过 EventBus 实现任意组件通信"
-      type="info" showIcon style={{ marginBottom: 16 }}
+      type="info"
+      showIcon
+      style={{ marginBottom: 16 }}
     />
 
     <Row gutter={[16, 16]}>
-      <Col xs={24} md={8}><PublisherA /></Col>
-      <Col xs={24} md={8}><SubscriberB /></Col>
-      <Col xs={24} md={8}><SubscriberC /></Col>
+      <Col xs={24} md={8}>
+        <PublisherA />
+      </Col>
+      <Col xs={24} md={8}>
+        <SubscriberB />
+      </Col>
+      <Col xs={24} md={8}>
+        <SubscriberC />
+      </Col>
     </Row>
   </div>
 )

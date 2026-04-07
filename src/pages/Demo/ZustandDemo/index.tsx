@@ -7,29 +7,40 @@ const products = [
   { id: 1, name: 'MacBook Pro', price: 12999 },
   { id: 2, name: 'iPhone 15', price: 5999 },
   { id: 3, name: 'AirPods Pro', price: 1799 },
-  { id: 4, name: 'iPad Air', price: 4799 },
+  { id: 4, name: 'iPad Air', price: 4799 }
 ]
 
 const ZustandDemo: React.FC = () => {
-  const { items, addItem, removeItem, updateQty, clearCart, total } = useCartStore()
+  const { items, addItem, removeItem, updateQty, clearCart, total } =
+    useCartStore()
 
-  const cartColumns: ColumnsType<typeof items[0]> = [
+  const cartColumns: ColumnsType<(typeof items)[0]> = [
     { title: '商品', dataIndex: 'name' },
     { title: '单价', dataIndex: 'price', render: (v) => `¥${v}` },
     {
       title: '数量',
       dataIndex: 'qty',
       render: (v, record) => (
-        <InputNumber min={0} value={v} onChange={(n) => updateQty(record.id, n ?? 0)} size="small" />
-      ),
+        <InputNumber
+          min={0}
+          value={v}
+          onChange={(n) => updateQty(record.id, n ?? 0)}
+          size="small"
+        />
+      )
     },
     { title: '小计', render: (_, r) => <Text strong>¥{r.price * r.qty}</Text> },
     {
       title: '操作',
       render: (_, r) => (
-        <Button size="small" danger icon={<DeleteOutlined />} onClick={() => removeItem(r.id)} />
-      ),
-    },
+        <Button
+          size="small"
+          danger
+          icon={<DeleteOutlined />}
+          onClick={() => removeItem(r.id)}
+        />
+      )
+    }
   ]
 
   return (
@@ -55,14 +66,24 @@ const ZustandDemo: React.FC = () => {
               {products.map((p) => (
                 <Card.Grid
                   key={p.id}
-                  style={{ width: '100%', padding: '10px 16px', cursor: 'pointer' }}
+                  style={{
+                    width: '100%',
+                    padding: '10px 16px',
+                    cursor: 'pointer'
+                  }}
                   onClick={() => addItem(p)}
                 >
-                  <Space style={{ justifyContent: 'space-between', width: '100%' }}>
+                  <Space
+                    style={{ justifyContent: 'space-between', width: '100%' }}
+                  >
                     <Text>{p.name}</Text>
                     <Space>
                       <Text type="danger">¥{p.price}</Text>
-                      <Button size="small" type="primary" icon={<ShoppingCartOutlined />}>
+                      <Button
+                        size="small"
+                        type="primary"
+                        icon={<ShoppingCartOutlined />}
+                      >
                         加购
                       </Button>
                     </Space>
@@ -75,9 +96,18 @@ const ZustandDemo: React.FC = () => {
 
         <Col xs={24} md={14}>
           <Card
-            title={<><ShoppingCartOutlined /> 购物车 ({items.length} 种商品)</>}
+            title={
+              <>
+                <ShoppingCartOutlined /> 购物车 ({items.length} 种商品)
+              </>
+            }
             extra={
-              <Button size="small" danger icon={<ClearOutlined />} onClick={clearCart}>
+              <Button
+                size="small"
+                danger
+                icon={<ClearOutlined />}
+                onClick={clearCart}
+              >
                 清空
               </Button>
             }
@@ -94,7 +124,9 @@ const ZustandDemo: React.FC = () => {
             <Divider dashed />
             <div style={{ textAlign: 'right' }}>
               <Text>合计: </Text>
-              <Text strong style={{ fontSize: 20, color: '#f5222d' }}>¥{total()}</Text>
+              <Text strong style={{ fontSize: 20, color: '#f5222d' }}>
+                ¥{total()}
+              </Text>
             </div>
           </Card>
         </Col>

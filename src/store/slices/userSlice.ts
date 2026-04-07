@@ -1,4 +1,8 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  createAsyncThunk,
+  type PayloadAction
+} from '@reduxjs/toolkit'
 import type { User } from '../../types'
 import { getUsers } from '../../api/user'
 
@@ -13,17 +17,20 @@ const initialState: UserSliceState = {
   list: [],
   selected: null,
   loading: false,
-  error: null,
+  error: null
 }
 
 // createAsyncThunk 异步 action
-export const fetchUsers = createAsyncThunk('users/fetchAll', async (_, { rejectWithValue }) => {
-  try {
-    return await getUsers()
-  } catch (err: unknown) {
-    return rejectWithValue((err as Error).message)
+export const fetchUsers = createAsyncThunk(
+  'users/fetchAll',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await getUsers()
+    } catch (err: unknown) {
+      return rejectWithValue((err as Error).message)
+    }
   }
-})
+)
 
 export const userSlice = createSlice({
   name: 'users',
@@ -34,7 +41,7 @@ export const userSlice = createSlice({
     },
     clearSelected: (state) => {
       state.selected = null
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -50,7 +57,7 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = action.payload as string
       })
-  },
+  }
 })
 
 export const { selectUser, clearSelected } = userSlice.actions

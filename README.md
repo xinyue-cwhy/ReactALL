@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
+# React 全家桶
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+基于 React 19 + TypeScript + Vite 的全家桶学习项目，包含 Redux、Zustand、React Query、React Router 等主流生态。
 
-Currently, two official plugins are available:
+## 技术栈
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **框架**：React 19 + TypeScript
+- **构建**：Vite
+- **路由**：React Router v7
+- **全局状态**：Redux Toolkit / Zustand
+- **服务端状态**：TanStack React Query + Axios
+- **UI**：Ant Design v6
 
-## Expanding the ESLint configuration
+## 代码规范
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### ESLint（v9 Flat Config）
 
-- Configure the top-level `parserOptions` property like this:
+配置文件：`eslint.config.js`
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+| 规则 | 说明 |
+|------|------|
+| `react-hooks/rules-of-hooks` | error — Hook 不能在条件/循环中调用 |
+| `react-hooks/exhaustive-deps` | warn — useEffect 依赖数组必须完整 |
+| `react/react-in-jsx-scope` | off — React 19 无需手动引入 |
+| `@typescript-eslint/no-unused-vars` | warn — 未使用变量（`_` 前缀忽略）|
+| `@typescript-eslint/no-explicit-any` | warn — 避免使用 any |
+
+### Prettier
+
+配置文件：`.prettierrc`
+
+| 选项 | 值 | 说明 |
+|------|----|------|
+| `semi` | false | 不加分号 |
+| `singleQuote` | true | 使用单引号 |
+| `trailingComma` | none | 不加尾逗号 |
+
+### VSCode 配置
+
+项目内置 `.vscode/settings.json`，打开项目即生效：
+
+- 保存时自动修复 ESLint 错误
+- 支持 ESLint v9 Flat Config
+- 实时校验 `.ts` / `.tsx` 文件
+
+推荐安装扩展：
+- **ESLint**（`dbaeumer.vscode-eslint`）≥ 3.0
+- **Prettier**（`esbenp.prettier-vscode`）
+- **Error Lens**（`usernamehw.errorlens`）— 行内显示错误信息
+
+## 开发
+
+```bash
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 脚本
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run lint        # 检查代码规范
+npm run lint:fix    # 自动修复可修复的问题
+npm run build       # 构建生产包
 ```

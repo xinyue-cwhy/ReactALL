@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const request = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com',
-  timeout: 10000,
+  timeout: 10000
 })
 
 // 请求拦截器

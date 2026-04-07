@@ -12,9 +12,9 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
+      refetchOnWindowFocus: false
+    }
+  }
 })
 
 // 内部组件：读取 ThemeContext 配置 Ant Design
@@ -25,8 +25,9 @@ const ThemedApp = () => {
     <ConfigProvider
       locale={zhCN}
       theme={{
-        algorithm: appTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
-        token: { colorPrimary: primaryColor },
+        algorithm:
+          appTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        token: { colorPrimary: primaryColor }
       }}
     >
       <AntApp>

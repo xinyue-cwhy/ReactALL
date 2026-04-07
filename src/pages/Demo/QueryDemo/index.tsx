@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getUsers, getPostsByUser, getTodos } from '../../../api/user'
 import type { Post, Todo } from '../../../types'
@@ -9,7 +9,7 @@ const { Title, Text, Paragraph } = Typography
 const postColumns: ColumnsType<Post> = [
   { title: 'ID', dataIndex: 'id', width: 50 },
   { title: '标题', dataIndex: 'title', ellipsis: true },
-  { title: '内容', dataIndex: 'body', ellipsis: true },
+  { title: '内容', dataIndex: 'body', ellipsis: true }
 ]
 
 const todoColumns: ColumnsType<Todo> = [
@@ -19,8 +19,10 @@ const todoColumns: ColumnsType<Todo> = [
     title: '状态',
     dataIndex: 'completed',
     width: 80,
-    render: (v) => <Tag color={v ? 'success' : 'default'}>{v ? '完成' : '待做'}</Tag>,
-  },
+    render: (v) => (
+      <Tag color={v ? 'success' : 'default'}>{v ? '完成' : '待做'}</Tag>
+    )
+  }
 ]
 
 const QueryDemo: React.FC = () => {
@@ -30,7 +32,7 @@ const QueryDemo: React.FC = () => {
   const { data: users = [], isLoading: usersLoading } = useQuery({
     queryKey: ['users'],
     queryFn: getUsers,
-    staleTime: 5 * 60 * 1000,  // 5分钟内不重新请求
+    staleTime: 5 * 60 * 1000 // 5分钟内不重新请求
   })
 
   // useQuery - 根据 userId 获取帖子（依赖查询）
@@ -39,17 +41,17 @@ const QueryDemo: React.FC = () => {
     isLoading: postsLoading,
     isFetching: postsFetching,
     refetch: refetchPosts,
-    dataUpdatedAt,
+    dataUpdatedAt
   } = useQuery({
     queryKey: ['posts', selectedUserId],
     queryFn: () => getPostsByUser(selectedUserId),
-    enabled: !!selectedUserId,
+    enabled: !!selectedUserId
   })
 
   // useQuery - 获取 todos
   const { data: todos = [], isLoading: todosLoading } = useQuery({
     queryKey: ['todos'],
-    queryFn: getTodos,
+    queryFn: getTodos
   })
 
   return (
@@ -67,19 +69,35 @@ const QueryDemo: React.FC = () => {
         {/* 统计 */}
         <Col xs={8}>
           <Card style={{ borderRadius: 8 }}>
-            <Statistic title="用户数" value={users.length} prefix={<DatabaseOutlined />} loading={usersLoading} />
+            <Statistic
+              title="用户数"
+              value={users.length}
+              prefix={<DatabaseOutlined />}
+              loading={usersLoading}
+            />
           </Card>
         </Col>
         <Col xs={8}>
           <Card style={{ borderRadius: 8 }}>
-            <Statistic title="帖子数" value={posts.length} loading={postsLoading} />
+            <Statistic
+              title="帖子数"
+              value={posts.length}
+              loading={postsLoading}
+            />
           </Card>
         </Col>
         <Col xs={8}>
           <Card style={{ borderRadius: 8 }}>
             <Statistic
               title="待办完成率"
-              value={todos.length ? Math.round(todos.filter((t) => t.completed).length / todos.length * 100) : 0}
+              value={
+                todos.length
+                  ? Math.round(
+                      (todos.filter((t) => t.completed).length / todos.length) *
+                        100
+                    )
+                  : 0
+              }
               suffix="%"
               loading={todosLoading}
             />
@@ -121,7 +139,8 @@ const QueryDemo: React.FC = () => {
 
               <Alert
                 message={`queryKey: ['posts', ${selectedUserId}] — 切换用户时自动重新请求，相同 key 使用缓存`}
-                type="info" showIcon
+                type="info"
+                showIcon
               />
 
               <Spin spinning={postsLoading || postsFetching}>
@@ -139,7 +158,10 @@ const QueryDemo: React.FC = () => {
 
         {/* Todos */}
         <Col span={24}>
-          <Card title="Todos（staleTime: 5min 缓存）" style={{ borderRadius: 8 }}>
+          <Card
+            title="Todos（staleTime: 5min 缓存）"
+            style={{ borderRadius: 8 }}
+          >
             <Spin spinning={todosLoading}>
               <Table
                 size="small"

@@ -1,11 +1,15 @@
 const fetchMessage = () => {
   return new Promise<string>((resolve) => {
     setTimeout(() => {
-      resolve("这是异步加载的消息！");
-    }, 2000);
-  });
-};
-const AsyncChild = ({ messagePromise }: { messagePromise: Promise<string> }) => {
+      resolve('这是异步加载的消息！')
+    }, 2000)
+  })
+}
+const AsyncChild = ({
+  messagePromise
+}: {
+  messagePromise: Promise<string>
+}) => {
   // 状态
   //   const [message, setMessage] = useState<string | null>(null);
   // 副作用
@@ -18,11 +22,11 @@ const AsyncChild = ({ messagePromise }: { messagePromise: Promise<string> }) => 
   //     loadMessage();
   //   }, []);
 
-  const message = use(messagePromise);
-  return <div>{message}</div>;
-};
+  const message = use(messagePromise)
+  return <div>{message}</div>
+}
 
-const messagePromise = fetchMessage();
+const messagePromise = fetchMessage()
 
 const SuspenseDemo = () => {
   return (
@@ -40,7 +44,7 @@ const SuspenseDemo = () => {
         <AsyncChild messagePromise={messagePromise} />
       </Suspense>
     </div>
-  );
-};
+  )
+}
 
-export default SuspenseDemo;
+export default SuspenseDemo

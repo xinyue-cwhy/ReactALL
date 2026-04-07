@@ -7,7 +7,11 @@ const NotFound: React.FC = () => {
       status="404"
       title="404"
       subTitle="页面不存在"
-      extra={<Button type="primary" onClick={() => navigate('/')}>返回首页</Button>}
+      extra={
+        <Button type="primary" onClick={() => navigate('/')}>
+          返回首页
+        </Button>
+      }
     />
   )
 }

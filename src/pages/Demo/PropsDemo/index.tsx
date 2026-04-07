@@ -1,23 +1,23 @@
-import { useState } from "react";
-import ChildComponent from "./ChildComponent";
-import GrandchildComponent from "./GrandchildComponent";
+import { useState } from 'react'
+import ChildComponent from './ChildComponent'
+import GrandchildComponent from './GrandchildComponent'
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Text, Paragraph } = Typography
 
 const PropsDemo: React.FC = () => {
-  const [count, setCount] = useState(0);
-  const [message, setMessage] = useState("你好，子组件！");
-  const [fromChild, setFromChild] = useState("");
+  const [count, setCount] = useState(0)
+  const [message, setMessage] = useState('你好，子组件！')
+  const [fromChild, setFromChild] = useState('')
 
   const submitHandler = (_state: unknown, formData: FormData) => {
     console.log({
-      username: formData.get("username"),
-      password: formData.get("password"),
-    });
-    return {};
-  };
-  const [state, submitAction, isPending] = useActionState(submitHandler, null);
-  console.log(state, isPending);
+      username: formData.get('username'),
+      password: formData.get('password')
+    })
+    return {}
+  }
+  const [state, submitAction, isPending] = useActionState(submitHandler, null)
+  console.log(state, isPending)
 
   return (
     <div>
@@ -38,13 +38,13 @@ const PropsDemo: React.FC = () => {
           <Card
             title={
               <>
-                <ArrowUpOutlined style={{ color: "#52c41a" }} /> 父组件
+                <ArrowUpOutlined style={{ color: '#52c41a' }} /> 父组件
                 (ParentComponent)
               </>
             }
-            style={{ border: "2px solid #52c41a", borderRadius: 8 }}
+            style={{ border: '2px solid #52c41a', borderRadius: 8 }}
           >
-            <Space direction="vertical" style={{ width: "100%" }}>
+            <Space direction="vertical" style={{ width: '100%' }}>
               <Space>
                 <Text>发送给子组件的消息:</Text>
                 <Input
@@ -56,8 +56,8 @@ const PropsDemo: React.FC = () => {
               <Alert
                 message={
                   <>
-                    从子组件收到:{" "}
-                    <Text strong>{fromChild || "(等待子组件发送...)"}</Text>
+                    从子组件收到:{' '}
+                    <Text strong>{fromChild || '(等待子组件发送...)'}</Text>
                   </>
                 }
                 type="warning"
@@ -85,7 +85,7 @@ const PropsDemo: React.FC = () => {
         </Col>
       </Row>
     </div>
-  );
-};
+  )
+}
 
-export default PropsDemo;
+export default PropsDemo

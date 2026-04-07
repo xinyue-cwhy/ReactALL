@@ -5,8 +5,8 @@ import userReducer from './slices/userSlice'
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    users: userReducer,
-  },
+    users: userReducer
+  }
 })
 
 export type RootState = ReturnType<typeof store.getState>

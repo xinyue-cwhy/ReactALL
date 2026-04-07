@@ -9,7 +9,7 @@ interface CounterState {
 const initialState: CounterState = {
   value: 0,
   step: 1,
-  history: [0],
+  history: [0]
 }
 
 export const counterSlice = createSlice({
@@ -34,9 +34,10 @@ export const counterSlice = createSlice({
     },
     setStep: (state, action: PayloadAction<number>) => {
       state.step = action.payload
-    },
-  },
+    }
+  }
 })
 
-export const { increment, decrement, incrementByAmount, reset, setStep } = counterSlice.actions
+export const { increment, decrement, incrementByAmount, reset, setStep } =
+  counterSlice.actions
 export default counterSlice.reducer

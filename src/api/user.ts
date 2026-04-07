@@ -3,7 +3,8 @@ import type { User, Post, Todo } from '../types'
 
 export const getUsers = (): Promise<User[]> => request.get('/users')
 
-export const getUserById = (id: number): Promise<User> => request.get(`/users/${id}`)
+export const getUserById = (id: number): Promise<User> =>
+  request.get(`/users/${id}`)
 
 export const getPosts = (): Promise<Post[]> => request.get('/posts')
 

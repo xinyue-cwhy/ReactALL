@@ -6,13 +6,11 @@ interface UserState {
   isLoggedIn: boolean
 }
 
-type UserAction =
-  | { type: 'LOGIN'; payload: User }
-  | { type: 'LOGOUT' }
+type UserAction = { type: 'LOGIN'; payload: User } | { type: 'LOGOUT' }
 
 const initialState: UserState = {
   currentUser: null,
-  isLoggedIn: false,
+  isLoggedIn: false
 }
 
 function userReducer(state: UserState, action: UserAction): UserState {
@@ -34,7 +32,7 @@ interface UserContextType extends UserState {
 const UserContext = createContext<UserContextType>({
   ...initialState,
   login: () => {},
-  logout: () => {},
+  logout: () => {}
 })
 
 export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {

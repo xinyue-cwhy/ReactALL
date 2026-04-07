@@ -1,14 +1,14 @@
-import type { FC, ReactNode } from "react";
-import SlotDemo from "./SlotDemo";
+import type { FC, ReactNode } from 'react'
+import SlotDemo from './SlotDemo'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 export interface ChildProps {
-  message: string; // 父 -> 子: props
-  count: number;
-  renderCount?: () => ReactNode; // 可选：父组件传入渲染函数
-  onCountChange: (n: number) => void; // 子 -> 父: 回调
-  onSendMessage: (msg: string) => void;
+  message: string // 父 -> 子: props
+  count: number
+  renderCount?: () => ReactNode // 可选：父组件传入渲染函数
+  onCountChange: (n: number) => void // 子 -> 父: 回调
+  onSendMessage: (msg: string) => void
 }
 
 const ChildComponent: FC<ChildProps> = ({
@@ -16,28 +16,28 @@ const ChildComponent: FC<ChildProps> = ({
   count,
   renderCount,
   onCountChange,
-  onSendMessage,
+  onSendMessage
 }) => {
-  const [input, setInput] = useState("");
-  const [constFather, setConstFather] = useState(0);
+  const [input, setInput] = useState('')
+  const [constFather, setConstFather] = useState(0)
   function countChangeHandle(params: number) {
     if (params > 10 || params < 0) {
-      return;
+      return
     }
-    onCountChange(params);
+    onCountChange(params)
   }
   return (
     <Card
       title={
         <>
-          <ArrowDownOutlined style={{ color: "#1677ff" }} /> 子组件
+          <ArrowDownOutlined style={{ color: '#1677ff' }} /> 子组件
           (ChildComponent)
         </>
       }
-      style={{ border: "2px solid #1677ff", borderRadius: 8 }}
+      style={{ border: '2px solid #1677ff', borderRadius: 8 }}
     >
       <div>{renderCount?.()}</div>
-      <Space direction="vertical" style={{ width: "100%" }}>
+      <Space direction="vertical" style={{ width: '100%' }}>
         <Alert
           message={
             <>
@@ -97,16 +97,16 @@ const ChildComponent: FC<ChildProps> = ({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onPressEnter={() => {
-            onSendMessage(input);
-            setInput("");
+            onSendMessage(input)
+            setInput('')
           }}
           addonAfter={
             <Button
               type="link"
               size="small"
               onClick={() => {
-                onSendMessage(input);
-                setInput("");
+                onSendMessage(input)
+                setInput('')
               }}
             >
               发送
@@ -115,7 +115,7 @@ const ChildComponent: FC<ChildProps> = ({
         />
       </Space>
     </Card>
-  );
-};
+  )
+}
 
-export default ChildComponent;
+export default ChildComponent

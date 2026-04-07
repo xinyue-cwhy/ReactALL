@@ -11,7 +11,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType>({
   theme: 'light',
   toggleTheme: () => {},
-  primaryColor: '#1677ff',
+  primaryColor: '#1677ff'
 })
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
