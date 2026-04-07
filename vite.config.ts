@@ -3,15 +3,61 @@ import react from '@vitejs/plugin-react'
 import AutoImport from 'unplugin-auto-import/vite'
 
 const antdComponents = [
-  'Button', 'Input', 'Select', 'Form', 'Table', 'Card', 'Modal',
-  'Drawer', 'Tabs', 'Tag', 'Badge', 'Alert', 'Space', 'Row', 'Col',
-  'Typography', 'Divider', 'List', 'Avatar', 'Image', 'Upload',
-  'Spin', 'Skeleton', 'Result', 'Empty', 'Pagination', 'Tooltip',
-  'Popover', 'Dropdown', 'Menu', 'Breadcrumb', 'Steps', 'Switch',
-  'Radio', 'Checkbox', 'DatePicker', 'TimePicker', 'Slider',
-  'InputNumber', 'Rate', 'Layout', 'Affix', 'Statistic', 'Timeline',
-  'Tree', 'Collapse', 'Carousel', 'Descriptions', 'Popconfirm',
-  'Progress', 'App', 'ConfigProvider', 'AutoComplete', 'Cascader', 'Result',
+  'Button',
+  'Input',
+  'Select',
+  'Form',
+  'Table',
+  'Card',
+  'Modal',
+  'Drawer',
+  'Tabs',
+  'Tag',
+  'Badge',
+  'Alert',
+  'Space',
+  'Row',
+  'Col',
+  'Typography',
+  'Divider',
+  'List',
+  'Avatar',
+  'Image',
+  'Upload',
+  'Spin',
+  'Skeleton',
+  'Result',
+  'Empty',
+  'Pagination',
+  'Tooltip',
+  'Popover',
+  'Dropdown',
+  'Menu',
+  'Breadcrumb',
+  'Steps',
+  'Switch',
+  'Radio',
+  'Checkbox',
+  'DatePicker',
+  'TimePicker',
+  'Slider',
+  'InputNumber',
+  'Rate',
+  'Layout',
+  'Affix',
+  'Statistic',
+  'Timeline',
+  'Tree',
+  'Collapse',
+  'Carousel',
+  'Descriptions',
+  'Popconfirm',
+  'Progress',
+  'App',
+  'ConfigProvider',
+  'AutoComplete',
+  'Cascader',
+  'Result'
 ]
 
 export default defineConfig({
@@ -39,8 +85,8 @@ export default defineConfig({
           ) {
             return { name, from: '@ant-design/icons' }
           }
-        },
-      ],
-    }),
-  ],
+        }
+      ]
+    })
+  ]
 })
