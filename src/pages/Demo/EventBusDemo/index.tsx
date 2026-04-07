@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Input, Typography, Space, Tag, Alert, List, Row, Col, Badge } from 'antd'
-import { SendOutlined, BellOutlined, NotificationOutlined } from '@ant-design/icons'
 import emitter from '../../../utils/eventBus'
 
 const { Title, Text, Paragraph } = Typography

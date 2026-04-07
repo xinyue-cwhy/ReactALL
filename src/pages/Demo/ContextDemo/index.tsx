@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { Card, Button, Switch, Typography, Space, Divider, Tag, Alert, Row, Col } from 'antd'
-import { BulbOutlined, UserOutlined } from '@ant-design/icons'
 import { useTheme } from '../../../context/ThemeContext'
 import { useUser } from '../../../context/UserContext'
 import type { User } from '../../../types'

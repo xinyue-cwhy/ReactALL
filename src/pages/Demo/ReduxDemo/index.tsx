@@ -1,6 +1,4 @@
 import React from 'react'
-import { Card, Button, InputNumber, Typography, Space, Divider, Tag, Alert, Table, Spin, Row, Col } from 'antd'
-import { MinusOutlined, PlusOutlined, ReloadOutlined, ThunderboltOutlined } from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppDispatch'
 import {
   increment, decrement, incrementByAmount, reset, setStep,

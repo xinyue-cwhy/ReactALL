@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Card, Select, Typography, Space, Tag, Alert, Table, Spin, Row, Col, Statistic, Button
-} from 'antd'
 import { useQuery } from '@tanstack/react-query'
-import { ReloadOutlined, DatabaseOutlined } from '@ant-design/icons'
 import { getUsers, getPostsByUser, getTodos } from '../../../api/user'
 import type { Post, Todo } from '../../../types'
 import type { ColumnsType } from 'antd/es/table'

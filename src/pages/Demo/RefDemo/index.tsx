@@ -1,5 +1,4 @@
 import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react'
-import { Card, Button, Typography, Space, Tag, Alert, Row, Col } from 'antd'
 
 const { Title, Text, Paragraph } = Typography
 

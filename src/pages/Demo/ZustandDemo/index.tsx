@@ -1,6 +1,4 @@
 import React from 'react'
-import { Card, Button, InputNumber, Typography, Space, Tag, Table, Divider, Row, Col, Alert } from 'antd'
-import { ShoppingCartOutlined, DeleteOutlined, ClearOutlined } from '@ant-design/icons'
 import { useCartStore } from './store'
 import type { ColumnsType } from 'antd/es/table'
 
