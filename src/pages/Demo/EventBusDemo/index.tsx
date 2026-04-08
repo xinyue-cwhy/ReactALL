@@ -174,6 +174,92 @@ const SubscriberC: React.FC = () => {
   )
 }
 
+// ============ count-changed 发布者 ============
+const CounterPublisher: React.FC = () => {
+  const [count, setCount] = useState(0)
+
+  const change = (delta: number) => {
+    const next = count + delta
+    setCount(next)
+    emitter.emit('count-changed', next)
+  }
+
+  return (
+    <Card
+      title={
+        <>
+          <RetweetOutlined /> 计数发布者
+        </>
+      }
+      style={{ border: '2px solid #1677ff', borderRadius: 8 }}
+    >
+      <Space>
+        <Button onClick={() => change(-1)}>－</Button>
+        <Text
+          strong
+          style={{
+            fontSize: 24,
+            minWidth: 40,
+            textAlign: 'center',
+            display: 'inline-block'
+          }}
+        >
+          {count}
+        </Text>
+        <Button type="primary" onClick={() => change(1)}>
+          ＋
+        </Button>
+      </Space>
+      <div style={{ marginTop: 8 }}>
+        <Text type="secondary" style={{ fontSize: 12 }}>
+          每次点击都会 emit('count-changed', value)
+        </Text>
+      </div>
+    </Card>
+  )
+}
+
+// ============ count-changed 订阅者 ============
+const CounterSubscriber: React.FC = () => {
+  const [history, setHistory] = useState<number[]>([])
+
+  useEffect(() => {
+    const handler = (val: number) => {
+      setHistory((prev) => [...prev.slice(-9), val])
+    }
+    emitter.on('count-changed', handler)
+    return () => emitter.off('count-changed', handler)
+  }, [])
+
+  return (
+    <Card
+      title={
+        <>
+          <BellOutlined /> 计数订阅者
+        </>
+      }
+      style={{ border: '2px solid #722ed1', borderRadius: 8 }}
+    >
+      <Text type="secondary" style={{ fontSize: 12 }}>
+        最近 10 次变化记录：
+      </Text>
+      <div style={{ marginTop: 8 }}>
+        {history.length === 0 ? (
+          <Text type="secondary">等待接收...</Text>
+        ) : (
+          <Space wrap>
+            {history.map((v, i) => (
+              <Tag key={i} color="purple">
+                {v}
+              </Tag>
+            ))}
+          </Space>
+        )}
+      </div>
+    </Card>
+  )
+}
+
 // ============ 页面 ============
 const EventBusDemo: React.FC = () => (
   <div>
@@ -204,6 +290,22 @@ const EventBusDemo: React.FC = () => (
       </Col>
       <Col xs={24} md={8}>
         <SubscriberC />
+      </Col>
+    </Row>
+
+    <Alert
+      message="count-changed 事件：发布 number 类型，订阅者只关心数值变化"
+      type="info"
+      showIcon
+      style={{ margin: '16px 0' }}
+    />
+
+    <Row gutter={[16, 16]}>
+      <Col xs={24} md={12}>
+        <CounterPublisher />
+      </Col>
+      <Col xs={24} md={12}>
+        <CounterSubscriber />
       </Col>
     </Row>
   </div>

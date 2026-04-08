@@ -48,6 +48,79 @@
 - **Prettier**（`esbenp.prettier-vscode`）
 - **Error Lens**（`usernamehw.errorlens`）— 行内显示错误信息
 
+## 学习路线
+
+### 阶段一：组件通信（已完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| PropsDemo | props 父→子、回调子→父、useActionState (React 19) | ✅ |
+| ContextDemo | createContext / useContext、Context 拆分优化、useCallback | ✅ |
+| EventBusDemo | mitt 事件总线、兄弟组件通信 | ✅ |
+| RefDemo | useRef 操作 DOM、forwardRef、useImperativeHandle | ✅|
+
+### 阶段二：Hooks 深入（部分完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| FormDemo | 受控表单、自定义校验、useRef 获取焦点 | ✅ |
+| EffectDemo | useEffect 副作用、清理函数、依赖数组、闭包陷阱、竞态处理 | ⬜ |
+| — | useReducer 复杂状态、搭配 Context 替代 Redux | ⬜ |
+| — | 自定义 Hook 封装（useFetch / useLocalStorage 等） | ⬜ |
+| — | useTransition / useDeferredValue 并发渲染 | ⬜ |
+
+### 阶段三：性能优化（待完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| — | React.memo + useMemo + useCallback 避免无效渲染 | ⬜ |
+| — | 渲染次数可视化（为什么重渲染 / 如何止损） | ⬜ |
+| — | lazy + Suspense 路由级代码分割 | ⬜ |
+| — | 虚拟列表（react-virtual 处理万级数据） | ⬜ |
+
+### 阶段四：路由进阶（待完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| — | React Router v7 嵌套路由 / 动态路由 / 404 | ⬜ |
+| — | loader / action 数据路由模式 | ⬜ |
+| — | 路由守卫（鉴权跳转） | ⬜ |
+| — | useNavigate / useSearchParams / useLocation | ⬜ |
+
+### 阶段五：状态管理（部分完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| ReduxDemo | createSlice、createAsyncThunk、useSelector、useDispatch | ⬜ |
+| ZustandDemo | create、persist 中间件、selector 精确订阅 | ✅ |
+
+### 阶段六：数据请求（待完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| QueryDemo | useQuery 依赖查询、staleTime 缓存、手动 refetch | ⬜ |
+| — | useMutation 增删改、乐观更新、invalidateQueries | ⬜ |
+| — | useInfiniteQuery 无限滚动 | ⬜ |
+
+### 阶段七：React 19 新特性（待完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| SuspenseDemo | Suspense + use() 读取 Promise | ⬜ |
+| PropsDemo | useActionState 表单 Action | ⬜ |
+| — | useOptimistic 乐观 UI | ⬜ |
+| — | React Compiler 自动 memo 原理 | ⬜ |
+
+### 阶段八：工程化（待完成）
+
+| Demo | 核心知识点 | 状态 |
+|------|-----------|------|
+| — | Error Boundary 错误边界 | ⬜ |
+| — | Vitest + Testing Library 单元测试 | ⬜ |
+| — | Vite 构建优化（分包、预构建） | ⬜ |
+
+---
+
 ## 开发
 
 ```bash
