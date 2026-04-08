@@ -26,6 +26,7 @@ const EventBusDemo = lazy(() => import('../pages/Demo/EventBusDemo'))
 const QueryDemo = lazy(() => import('../pages/Demo/QueryDemo'))
 const SuspenseDemo = lazy(() => import('../pages/Demo/SuspenseDemo'))
 const FormDemo = lazy(() => import('../pages/Demo/FormDemo'))
+const EffectDemo = lazy(() => import('../pages/Demo/EffectDemo'))
 const NotFound = lazy(() => import('../pages/NotFound'))
 
 const withSuspense = (Component: FC) => (
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
       { path: 'demo/query', element: withSuspense(QueryDemo) },
       { path: 'demo/suspense', element: withSuspense(SuspenseDemo) },
       { path: 'demo/form', element: withSuspense(FormDemo) },
+      { path: 'demo/effect', element: withSuspense(EffectDemo) },
       { path: '404', element: withSuspense(NotFound) },
       { path: '*', element: <Navigate to="/404" replace /> }
     ]

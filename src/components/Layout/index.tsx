@@ -13,9 +13,9 @@ const menuItems = [
     label: '首页'
   },
   {
-    key: 'demo',
+    key: 'communication',
     icon: <SwapOutlined />,
-    label: '通信方式演示',
+    label: '组件通信',
     children: [
       {
         key: '/demo/props',
@@ -27,6 +27,28 @@ const menuItems = [
         icon: <GlobalOutlined />,
         label: 'Context 跨层通信'
       },
+      { key: '/demo/ref', icon: <RetweetOutlined />, label: 'Ref 命令式通信' },
+      {
+        key: '/demo/eventbus',
+        icon: <ApiOutlined />,
+        label: 'EventBus 发布订阅'
+      }
+    ]
+  },
+  {
+    key: 'hooks',
+    icon: <BulbOutlined />,
+    label: 'Hooks 深入',
+    children: [
+      { key: '/demo/form', icon: <ToolOutlined />, label: '受控表单' },
+      { key: '/demo/effect', icon: <BulbOutlined />, label: 'useEffect 副作用' }
+    ]
+  },
+  {
+    key: 'state',
+    icon: <ThunderboltOutlined />,
+    label: '状态管理',
+    children: [
       {
         key: '/demo/redux',
         icon: <ThunderboltOutlined />,
@@ -36,27 +58,30 @@ const menuItems = [
         key: '/demo/zustand',
         icon: <ShareAltOutlined />,
         label: 'Zustand 状态管理'
-      },
-      { key: '/demo/ref', icon: <RetweetOutlined />, label: 'Ref 命令式通信' },
-      {
-        key: '/demo/eventbus',
-        icon: <ApiOutlined />,
-        label: 'EventBus 发布订阅'
-      },
+      }
+    ]
+  },
+  {
+    key: 'data',
+    icon: <DatabaseOutlined />,
+    label: '数据请求',
+    children: [
       {
         key: '/demo/query',
-        icon: <FunctionOutlined />,
+        icon: <DatabaseOutlined />,
         label: 'React Query + Axios'
-      },
+      }
+    ]
+  },
+  {
+    key: 'react19',
+    icon: <ReloadOutlined />,
+    label: 'React 19 新特性',
+    children: [
       {
         key: '/demo/suspense',
-        icon: <FunctionOutlined />,
+        icon: <ReloadOutlined />,
         label: 'React Suspense'
-      },
-      {
-        key: '/demo/form',
-        icon: <FunctionOutlined />,
-        label: '受控表单'
       }
     ]
   }
@@ -72,7 +97,8 @@ const breadcrumbMap: Record<string, string> = {
   '/demo/eventbus': 'EventBus 发布订阅',
   '/demo/query': 'React Query + Axios',
   '/demo/suspense': 'React Suspense',
-  '/demo/form': '受控表单'
+  '/demo/form': '受控表单',
+  '/demo/effect': 'useEffect 副作用'
 }
 
 const AppLayout: React.FC = () => {
@@ -93,48 +119,72 @@ const AppLayout: React.FC = () => {
   ]
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ height: '100vh', overflow: 'hidden' }}>
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={setCollapsed}
         theme={isDark ? 'dark' : 'light'}
-        style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.06)' }}
+        style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.06)', overflow: 'hidden' }}
       >
         <div
-          style={{
-            height: 64,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: token.colorPrimary,
-            marginBottom: 8
-          }}
+          style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
         >
-          <Text
+          {/* Logo - 吸顶 */}
+          <div
             style={{
-              color: '#fff',
-              fontWeight: 700,
-              fontSize: collapsed ? 12 : 16
+              height: 64,
+              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: token.colorPrimary
             }}
           >
-            {collapsed ? 'RF' : 'React 全家桶'}
-          </Text>
-        </div>
-        <Menu
-          theme={isDark ? 'dark' : 'light'}
-          mode="inline"
-          selectedKeys={[location.pathname]}
-          defaultOpenKeys={['demo']}
-          items={menuItems}
-          onClick={({ key }) => navigate(key)}
-        />
-      </Sider>
+            <Text
+              style={{
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: collapsed ? 12 : 16
+              }}
+            >
+              {collapsed ? 'RF' : 'React 全家桶'}
+            </Text>
+          </div>
 
+          {/* 首页 - 吸顶 */}
+          <Menu
+            theme={isDark ? 'dark' : 'light'}
+            mode="inline"
+            selectedKeys={[location.pathname]}
+            items={[menuItems[0]]}
+            onClick={({ key }) => navigate(key)}
+            style={{ flexShrink: 0 }}
+          />
+
+          {/* 分类菜单 - 可滚动 */}
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <Menu
+              theme={isDark ? 'dark' : 'light'}
+              mode="inline"
+              selectedKeys={[location.pathname]}
+              defaultOpenKeys={[
+                'communication',
+                'hooks',
+                'state',
+                'data',
+                'react19'
+              ]}
+              items={menuItems.slice(1)}
+              onClick={({ key }) => navigate(key)}
+            />
+          </div>
+        </div>
+      </Sider>
+      {/* 右侧内容 */}
       <Layout>
         <Header
           style={{
-            padding: '0 24px',
             background: token.colorBgContainer,
             display: 'flex',
             alignItems: 'center',
@@ -153,24 +203,24 @@ const AppLayout: React.FC = () => {
             <Text strong>React 全家桶 Demo</Text>
           </Space>
         </Header>
+        <div style={{ flex: 1, overflow: 'auto' }}>
+          <Content
+            style={{
+              padding: 24,
+              background: token.colorBgContainer,
+              minHeight: 360
+            }}
+          >
+            <Outlet />
+          </Content>
 
-        <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            background: token.colorBgContainer,
-            borderRadius: token.borderRadiusLG,
-            minHeight: 360
-          }}
-        >
-          <Outlet />
-        </Content>
-
-        <Footer
-          style={{ textAlign: 'center', color: token.colorTextSecondary }}
-        >
-          React + Vite + TypeScript 全家桶演示 &copy; {new Date().getFullYear()}
-        </Footer>
+          <Footer
+            style={{ textAlign: 'center', color: token.colorTextSecondary }}
+          >
+            React + Vite + TypeScript 全家桶演示 &copy;{' '}
+            {new Date().getFullYear()}
+          </Footer>
+        </div>
       </Layout>
     </Layout>
   )
