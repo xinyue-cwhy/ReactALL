@@ -27,6 +27,10 @@ const QueryDemo = lazy(() => import('../pages/Demo/QueryDemo'))
 const SuspenseDemo = lazy(() => import('../pages/Demo/SuspenseDemo'))
 const FormDemo = lazy(() => import('../pages/Demo/FormDemo'))
 const EffectDemo = lazy(() => import('../pages/Demo/EffectDemo'))
+const ReducerDemo = lazy(() => import('../pages/Demo/ReducerDemo'))
+const CustomHookDemo = lazy(() => import('../pages/Demo/CustomHookDemo'))
+const ConcurrentDemo = lazy(() => import('../pages/Demo/ConcurrentDemo'))
+const MemoDemo = lazy(() => import('../pages/Demo/MemoDemo'))
 const NotFound = lazy(() => import('../pages/NotFound'))
 
 const withSuspense = (Component: FC) => (
@@ -51,6 +55,10 @@ const router = createBrowserRouter([
       { path: 'demo/suspense', element: withSuspense(SuspenseDemo) },
       { path: 'demo/form', element: withSuspense(FormDemo) },
       { path: 'demo/effect', element: withSuspense(EffectDemo) },
+      { path: 'demo/reducer', element: withSuspense(ReducerDemo) },
+      { path: 'demo/custom-hook', element: withSuspense(CustomHookDemo) },
+      { path: 'demo/concurrent', element: withSuspense(ConcurrentDemo) },
+      { path: 'demo/memo', element: withSuspense(MemoDemo) },
       { path: '404', element: withSuspense(NotFound) },
       { path: '*', element: <Navigate to="/404" replace /> }
     ]

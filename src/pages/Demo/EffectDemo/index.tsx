@@ -16,16 +16,17 @@ const DepsDemo: React.FC = () => {
   // 无依赖数组：每次渲染后都执行
   // ⚠️ 不能在这里调用 setState（addLog 也不行）
   // 否则：effect → setState → 重渲染 → effect → setState → ... 无限循环！
+  // ⚠️ 开发环境 StrictMode 会执行两次：挂载 → 模拟卸载 → 重新挂载，目的是暴露没写 cleanup 的 bug；生产环境只执行一次
   useEffect(() => {
     console.log(`[无依赖] 第 ${renderCount.current} 次渲染后执行`)
   })
 
-  // 空依赖数组：只在挂载时执行一次
+  // 空依赖数组：只在挂载时执行一次（生产环境），开发环境 StrictMode 执行两次
   useEffect(() => {
     addLog('[空依赖] 挂载时执行（仅一次）')
   }, [])
 
-  // 有依赖：只在 count 变化时执行
+  // 有依赖：只在 count 变化时执行，开发环境初始挂载同样执行两次
   useEffect(() => {
     addLog(`[依赖 count] count 变为 ${count}`)
   }, [count])
@@ -181,19 +182,36 @@ const StaleClosure: React.FC = () => {
   // 每次渲染同步 ref，让回调里始终能拿到最新值
   countRef.current = count
 
-  // ❌ 闭包陷阱：3 秒后打印的永远是旧值 0
+  // ❌ 闭包陷阱：3 秒后打印的永远是旧值
+  //    每次渲染都会创建新的 alertStale，但 setTimeout 注册的是点击时那一刻的旧函数
+  //    那个函数的 count 快照永远是点击时的值，不会更新
   const alertStale = () => {
     setTimeout(() => {
       alert(`[闭包陷阱] 3 秒前的 count：${count}`)
     }, 3000)
   }
 
-  // ✅ 用 ref 解决：3 秒后读 ref，拿到最新值
+  // ✅ 方案一：用 ref 解决——ref 是贯穿整个生命周期的同一个对象
+  //    countRef.current 每次渲染都被更新，3 秒后读到的是最新值
   const alertFresh = () => {
     setTimeout(() => {
       alert(`[ref 解决] 当前最新 count：${countRef.current}`)
     }, 3000)
   }
+
+  // ✅ 方案二：函数式更新——适用于"更新 state"的场景（不是读取）
+  //    setCount(c => c + 1) 中的 c 由 React 传入，永远是最新值
+  //    所以即使在空依赖的 effect 里也不会有闭包陷阱：
+  //
+  //    useEffect(() => {
+  //      const timer = setInterval(() => {
+  //        setCount(c => c + 1)  // ✅ c 是 React 保证的最新值
+  //        // setCount(count + 1) ❌ count 是快照，永远是 effect 创建时的值
+  //      }, 1000)
+  //      return () => clearInterval(timer)
+  //    }, [])
+  //
+  //    注意：函数式更新只能解决"写"，alert(count) 这种"读"只能用 ref
 
   return (
     <Card title="闭包陷阱 & 解决方案" size="small" style={{ borderRadius: 8 }}>
@@ -230,9 +248,125 @@ const StaleClosure: React.FC = () => {
   )
 }
 
+// ============ 场景3b：函数式更新 vs 闭包陷阱（setInterval）============
+const IntervalDemo: React.FC = () => {
+  const [staleCount, setStaleCount] = useState(0)
+  const [freshCount, setFreshCount] = useState(0)
+  const [running, setRunning] = useState(false)
+
+  // ❌ 闭包陷阱版：空依赖，staleCount 快照永远是 0
+  //    setInterval 回调捕获了 effect 创建时的 staleCount = 0
+  //    每次执行 0 + 1 = 1，staleCount 永远是 1
+  useEffect(() => {
+    if (!running) return
+    const timer = setInterval(() => {
+      setStaleCount(staleCount + 1)
+    }, 500)
+    return () => clearInterval(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [running]) // 故意不加 staleCount，模拟陷阱：让 staleCount 永远是快照 0
+
+  // ✅ 函数式更新版：c 由 React 传入，永远是最新值，空依赖也没问题
+  useEffect(() => {
+    if (!running) return
+    const timer = setInterval(() => {
+      setFreshCount((c) => c + 1)
+    }, 500)
+    return () => clearInterval(timer)
+  }, [running])
+
+  const handleToggle = () => {
+    if (running) {
+      setRunning(false)
+    } else {
+      setStaleCount(0)
+      setFreshCount(0)
+      setRunning(true)
+    }
+  }
+
+  return (
+    <Card
+      title="函数式更新 vs 闭包陷阱（setInterval）"
+      size="small"
+      style={{ borderRadius: 8 }}
+    >
+      <Paragraph type="secondary" style={{ marginBottom: 12 }}>
+        同样的 setInterval，每 500ms +1，观察两个计数器的区别
+      </Paragraph>
+      <Button
+        type={running ? 'default' : 'primary'}
+        danger={running}
+        onClick={handleToggle}
+        style={{ marginBottom: 16 }}
+      >
+        {running ? '停止' : '开始计时'}
+      </Button>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Card
+            size="small"
+            style={{
+              background: '#fff1f0',
+              borderRadius: 6,
+              textAlign: 'center'
+            }}
+          >
+            <div style={{ fontSize: 12, color: '#ff4d4f', marginBottom: 4 }}>
+              ❌ setCount(count + 1)
+            </div>
+            <div style={{ fontSize: 36, fontWeight: 700, color: '#ff4d4f' }}>
+              {staleCount}
+            </div>
+            <div style={{ fontSize: 11, color: '#999', marginTop: 4 }}>
+              count 快照永远是 0，结果永远是 1
+            </div>
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card
+            size="small"
+            style={{
+              background: '#f6ffed',
+              borderRadius: 6,
+              textAlign: 'center'
+            }}
+          >
+            <div style={{ fontSize: 12, color: '#52c41a', marginBottom: 4 }}>
+              ✅ setCount(c =&gt; c + 1)
+            </div>
+            <div style={{ fontSize: 36, fontWeight: 700, color: '#52c41a' }}>
+              {freshCount}
+            </div>
+            <div style={{ fontSize: 11, color: '#999', marginTop: 4 }}>
+              c 由 React 传入，永远是最新值
+            </div>
+          </Card>
+        </Col>
+      </Row>
+      <Alert
+        style={{ marginTop: 12 }}
+        type="warning"
+        showIcon
+        message={
+          <Text style={{ fontSize: 12 }}>
+            <Text strong>函数式更新的局限：</Text>
+            只能解决"写"（更新 state）的闭包陷阱。 如果需要"读"最新值（如
+            alert、上报），还是要用 <Text code>useRef</Text>。
+          </Text>
+        }
+      />
+    </Card>
+  )
+}
+
 // ============ 场景4：数据获取 + 竞态处理 ============
-const FetchDemo: React.FC = () => {
-  const [userId, setUserId] = useState(1)
+
+// 方案一：cancelled flag（请求继续跑，但结果被忽略）
+const FetchWithFlag: React.FC<{
+  userId: number
+  label: string
+}> = ({ userId, label }) => {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -240,7 +374,6 @@ const FetchDemo: React.FC = () => {
     setLoading(true)
     setUser(null)
 
-    // ★ 竞态处理：用 cancelled flag 避免旧请求覆盖新结果
     let cancelled = false
 
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
@@ -253,15 +386,80 @@ const FetchDemo: React.FC = () => {
       })
 
     return () => {
-      // 切换 userId 时，取消旧请求的 setState
-      cancelled = true
+      cancelled = true // 旧请求回来后不 setState，但网络请求还在跑
     }
   }, [userId])
+
+  return loading ? (
+    <Spin size="small" />
+  ) : user ? (
+    <Card size="small" style={{ background: '#f6f8fa', borderRadius: 6 }}>
+      <Tag color="blue" style={{ marginBottom: 4 }}>
+        {label}
+      </Tag>
+      <div>
+        <Text strong>{user.name}</Text>
+      </div>
+      <Text type="secondary">{user.email}</Text>
+    </Card>
+  ) : null
+}
+
+// 方案二：AbortController（真正取消网络请求，浏览器不再等待响应）
+const FetchWithAbort: React.FC<{
+  userId: number
+  label: string
+}> = ({ userId, label }) => {
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    setUser(null)
+
+    // ★ 创建一个控制器，每次 effect 执行都是新的
+    const controller = new AbortController()
+
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+      signal: controller.signal // 把信号传给 fetch
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        setUser(data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        // abort() 会让 fetch 抛出 AbortError，需要捕获，否则控制台报错
+        if (err.name !== 'AbortError') throw err
+      })
+
+    return () => {
+      controller.abort() // cleanup：真正取消网络请求，浏览器停止等待响应
+    }
+  }, [userId])
+
+  return loading ? (
+    <Spin size="small" />
+  ) : user ? (
+    <Card size="small" style={{ background: '#f6f8fa', borderRadius: 6 }}>
+      <Tag color="green" style={{ marginBottom: 4 }}>
+        {label}
+      </Tag>
+      <div>
+        <Text strong>{user.name}</Text>
+      </div>
+      <Text type="secondary">{user.email}</Text>
+    </Card>
+  ) : null
+}
+
+const FetchDemo: React.FC = () => {
+  const [userId, setUserId] = useState(1)
 
   return (
     <Card title="数据获取 + 竞态处理" size="small" style={{ borderRadius: 8 }}>
       <Paragraph type="secondary" style={{ marginBottom: 8 }}>
-        快速切换用户，旧请求的结果不会覆盖新结果
+        快速切换用户，对比两种竞态处理方式的区别
       </Paragraph>
       <Space style={{ marginBottom: 12 }}>
         {[1, 2, 3, 4].map((id) => (
@@ -275,25 +473,31 @@ const FetchDemo: React.FC = () => {
           </Button>
         ))}
       </Space>
-      {loading ? (
-        <Spin size="small" />
-      ) : user ? (
-        <Card size="small" style={{ background: '#f6f8fa', borderRadius: 6 }}>
-          <Text strong>{user.name}</Text>
-          <br />
-          <Text type="secondary">{user.email}</Text>
-        </Card>
-      ) : null}
+      <Row gutter={[12, 0]}>
+        <Col span={12}>
+          <div style={{ fontSize: 12, color: '#999', marginBottom: 4 }}>
+            cancelled flag（请求仍在跑，只忽略结果）
+          </div>
+          <FetchWithFlag userId={userId} label="cancelled flag" />
+        </Col>
+        <Col span={12}>
+          <div style={{ fontSize: 12, color: '#999', marginBottom: 4 }}>
+            AbortController（真正取消网络请求）
+          </div>
+          <FetchWithAbort userId={userId} label="AbortController" />
+        </Col>
+      </Row>
       <Alert
         style={{ marginTop: 12 }}
         type="info"
         showIcon
         message={
           <Text style={{ fontSize: 12 }}>
-            <Text strong>竞态问题：</Text>
-            快速切换时，慢请求可能比快请求后返回，导致旧数据覆盖新数据。 用{' '}
-            <Text code>cancelled</Text> flag 或{' '}
-            <Text code>AbortController</Text> 处理。
+            <Text strong>区别：</Text>
+            <Text code>cancelled flag</Text>
+            {' 请求发出去就收不回来，浏览器还在等响应，浪费带宽。'}
+            <Text code>AbortController</Text>
+            {' 调用 abort() 后浏览器立即终止请求，节省资源，是更彻底的方案。'}
           </Text>
         }
       />
@@ -319,6 +523,9 @@ const EffectDemo: React.FC = () => (
       </Col>
       <Col xs={24} md={12}>
         <StaleClosure />
+      </Col>
+      <Col xs={24} md={12}>
+        <IntervalDemo />
       </Col>
       <Col xs={24} md={12}>
         <FetchDemo />

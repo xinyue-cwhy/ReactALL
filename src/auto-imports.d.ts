@@ -19,6 +19,7 @@ declare global {
   const Button: typeof import('antd').Button
   const Card: typeof import('antd').Card
   const ClearOutlined: typeof import('@ant-design/icons').ClearOutlined
+  const CodeOutlined: typeof import('@ant-design/icons').CodeOutlined
   const Col: typeof import('antd').Col
   const ConfigProvider: typeof import('antd').ConfigProvider
   const DatabaseOutlined: typeof import('@ant-design/icons').DatabaseOutlined
@@ -64,6 +65,7 @@ declare global {
   const ThunderboltOutlined: typeof import('@ant-design/icons').ThunderboltOutlined
   const ToolOutlined: typeof import('@ant-design/icons').ToolOutlined
   const Typography: typeof import('antd').Typography
+  const UndoOutlined: typeof import('@ant-design/icons').UndoOutlined
   const UserOutlined: typeof import('@ant-design/icons').UserOutlined
   const cache: typeof import('react').cache
   const cacheSignal: typeof import('react').cacheSignal

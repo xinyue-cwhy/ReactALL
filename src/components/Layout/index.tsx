@@ -41,7 +41,38 @@ const menuItems = [
     label: 'Hooks 深入',
     children: [
       { key: '/demo/form', icon: <ToolOutlined />, label: '受控表单' },
-      { key: '/demo/effect', icon: <BulbOutlined />, label: 'useEffect 副作用' }
+      {
+        key: '/demo/effect',
+        icon: <BulbOutlined />,
+        label: 'useEffect 副作用'
+      },
+      {
+        key: '/demo/reducer',
+        icon: <FunctionOutlined />,
+        label: 'useReducer 复杂状态'
+      },
+      {
+        key: '/demo/custom-hook',
+        icon: <CodeOutlined />,
+        label: '自定义 Hook'
+      },
+      {
+        key: '/demo/concurrent',
+        icon: <ThunderboltOutlined />,
+        label: 'useTransition / useDeferredValue'
+      }
+    ]
+  },
+  {
+    key: 'perf',
+    icon: <StarOutlined />,
+    label: '性能优化',
+    children: [
+      {
+        key: '/demo/memo',
+        icon: <StarOutlined />,
+        label: 'memo / useMemo / useCallback'
+      }
     ]
   },
   {
@@ -98,7 +129,11 @@ const breadcrumbMap: Record<string, string> = {
   '/demo/query': 'React Query + Axios',
   '/demo/suspense': 'React Suspense',
   '/demo/form': '受控表单',
-  '/demo/effect': 'useEffect 副作用'
+  '/demo/effect': 'useEffect 副作用',
+  '/demo/reducer': 'useReducer 复杂状态',
+  '/demo/custom-hook': '自定义 Hook',
+  '/demo/concurrent': '并发渲染',
+  '/demo/memo': '性能优化 memo'
 }
 
 const AppLayout: React.FC = () => {
@@ -171,6 +206,7 @@ const AppLayout: React.FC = () => {
               defaultOpenKeys={[
                 'communication',
                 'hooks',
+                'perf',
                 'state',
                 'data',
                 'react19'
@@ -185,6 +221,7 @@ const AppLayout: React.FC = () => {
       <Layout>
         <Header
           style={{
+            padding: '0 24px',
             background: token.colorBgContainer,
             display: 'flex',
             alignItems: 'center',

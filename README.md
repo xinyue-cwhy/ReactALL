@@ -59,15 +59,15 @@
 | EventBusDemo | mitt 事件总线、兄弟组件通信 | ✅ |
 | RefDemo | useRef 操作 DOM、forwardRef、useImperativeHandle | ✅|
 
-### 阶段二：Hooks 深入（部分完成）
+### 阶段二：Hooks 深入（已完成）
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
 | FormDemo | 受控表单、自定义校验、useRef 获取焦点 | ✅ |
-| EffectDemo | useEffect 副作用、清理函数、依赖数组、闭包陷阱、竞态处理 | ⬜ |
-| — | useReducer 复杂状态、搭配 Context 替代 Redux | ⬜ |
-| — | 自定义 Hook 封装（useFetch / useLocalStorage 等） | ⬜ |
-| — | useTransition / useDeferredValue 并发渲染 | ⬜ |
+| EffectDemo | useEffect 副作用、清理函数、依赖数组、闭包陷阱、竞态处理 | ✅|
+| — | useReducer 复杂状态、搭配 Context 替代 Redux | ✅ |
+| — | 自定义 Hook 封装（useFetch / useLocalStorage 等） | ✅ |
+| — | useTransition / useDeferredValue 并发渲染 | ✅ |
 
 ### 阶段三：性能优化（待完成）
 
@@ -118,6 +118,18 @@
 | — | Error Boundary 错误边界 | ⬜ |
 | — | Vitest + Testing Library 单元测试 | ⬜ |
 | — | Vite 构建优化（分包、预构建） | ⬜ |
+
+### 番外：React Fiber 原理（独立学习路线）
+
+> 理解 React 内部运行机制，解释"为什么这样设计"的底层答案。
+
+| 主题 | 核心知识点 | 状态 |
+|------|-----------|------|
+| Fiber 数据结构 | Fiber 节点结构、memoizedState hook 链表、child/sibling/return 指针 | ⬜ |
+| 调和（Reconciliation） | 双缓冲 Fiber 树（current / workInProgress）、diff 算法、key 的作用 | ⬜ |
+| 渲染两阶段 | render 阶段（可中断）vs commit 阶段（不可中断）、时间切片 | ⬜ |
+| 优先级调度 | Lane 优先级模型、Scheduler、并发模式（Concurrent Mode） | ⬜ |
+| Hooks 实现原理 | useState/useEffect 在 Fiber 上的存储方式、为什么不能在条件里用 Hook | ⬜ |
 
 ---
 

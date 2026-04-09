@@ -62,6 +62,45 @@ const categories = [
         desc: '掌握依赖数组、清理函数、闭包陷阱与竞态处理，用好 React 副作用。',
         tags: ['useEffect', '依赖数组', '清理函数'],
         color: '#fffbe6'
+      },
+      {
+        key: '/demo/reducer',
+        icon: <FunctionOutlined style={{ fontSize: 32, color: '#722ed1' }} />,
+        title: 'useReducer 复杂状态',
+        desc: '用 useReducer 管理多字段复杂状态，搭配 Context 实现轻量级全局状态，替代 Redux。',
+        tags: ['useReducer', 'Context', 'dispatch'],
+        color: '#f9f0ff'
+      },
+      {
+        key: '/demo/custom-hook',
+        icon: <CodeOutlined style={{ fontSize: 32, color: '#096dd9' }} />,
+        title: '自定义 Hook',
+        desc: '封装 useFetch、useLocalStorage、useDebounce、useToggle 等通用 Hook，复用状态逻辑。',
+        tags: ['useFetch', 'useLocalStorage', 'useDebounce'],
+        color: '#e6f4ff'
+      },
+      {
+        key: '/demo/concurrent',
+        icon: <ThunderboltOutlined style={{ fontSize: 32, color: '#cf1322' }} />,
+        title: '并发渲染',
+        desc: '用 useTransition 标记非紧急更新，用 useDeferredValue 滞后值，保持 UI 始终响应。',
+        tags: ['useTransition', 'useDeferredValue', 'pending'],
+        color: '#fff1f0'
+      }
+    ]
+  },
+  {
+    label: '性能优化',
+    color: '#389e0d',
+    icon: <StarOutlined />,
+    demos: [
+      {
+        key: '/demo/memo',
+        icon: <StarOutlined style={{ fontSize: 32, color: '#389e0d' }} />,
+        title: 'memo / useMemo / useCallback',
+        desc: '用 React.memo 跳过子组件无效渲染，用 useCallback 稳定回调引用，用 useMemo 缓存昂贵计算。',
+        tags: ['React.memo', 'useMemo', 'useCallback'],
+        color: '#f6ffed'
       }
     ]
   },
