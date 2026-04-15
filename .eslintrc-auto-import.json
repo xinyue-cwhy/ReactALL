@@ -38,6 +38,7 @@
     "Routes": true,
     "Row": true,
     "Select": true,
+    "SendOutlined": true,
     "ShareAltOutlined": true,
     "Space": true,
     "Spin": true,

@@ -106,12 +106,12 @@
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
-| SuspenseDemo | Suspense + use() 读取 Promise | ⬜ |
-| PropsDemo | useActionState 表单 Action | ⬜ |
-| — | useOptimistic 乐观 UI | ⬜ |
-| — | React Compiler 自动 memo 原理 | ⬜ |
+| SuspenseDemo | Suspense + use() 读取 Promise | ✅ |
+| PropsDemo | useActionState 表单 Action | ✅ |
+| — | useOptimistic 乐观 UI | ✅ |
+| — | React Compiler 自动 memo 原理 | ✅ |
 
-### 阶段八：工程化（待完成）
+### 阶段八：工程化（已完成）
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
