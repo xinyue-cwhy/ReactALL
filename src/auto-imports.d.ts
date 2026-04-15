@@ -14,22 +14,24 @@ declare global {
   const Avatar: typeof import('antd').Avatar
   const Badge: typeof import('antd').Badge
   const BellOutlined: typeof import('@ant-design/icons').BellOutlined
+  const BranchesOutlined: typeof import('@ant-design/icons').BranchesOutlined
   const Breadcrumb: typeof import('antd').Breadcrumb
   const BulbOutlined: typeof import('@ant-design/icons').BulbOutlined
   const Button: typeof import('antd').Button
   const Card: typeof import('antd').Card
   const ClearOutlined: typeof import('@ant-design/icons').ClearOutlined
+  const CloudDownloadOutlined: typeof import('@ant-design/icons').CloudDownloadOutlined
   const CodeOutlined: typeof import('@ant-design/icons').CodeOutlined
   const Col: typeof import('antd').Col
   const ConfigProvider: typeof import('antd').ConfigProvider
   const DatabaseOutlined: typeof import('@ant-design/icons').DatabaseOutlined
   const DeleteOutlined: typeof import('@ant-design/icons').DeleteOutlined
   const Divider: typeof import('antd').Divider
+  const EyeInvisibleOutlined: typeof import('@ant-design/icons').EyeInvisibleOutlined
   const Fragment: typeof import('react').Fragment
   const FunctionOutlined: typeof import('@ant-design/icons').FunctionOutlined
   const GlobalOutlined: typeof import('@ant-design/icons').GlobalOutlined
   const HomeOutlined: typeof import('@ant-design/icons').HomeOutlined
-  const InfoCircleOutlined: typeof import('@ant-design/icons').InfoCircleOutlined
   const Input: typeof import('antd').Input
   const InputNumber: typeof import('antd').InputNumber
   const Layout: typeof import('antd').Layout
@@ -44,7 +46,6 @@ declare global {
   const Outlet: typeof import('react-router-dom').Outlet
   const PlusOutlined: typeof import('@ant-design/icons').PlusOutlined
   const ReloadOutlined: typeof import('@ant-design/icons').ReloadOutlined
-  const Result: typeof import('antd').Result
   const RetweetOutlined: typeof import('@ant-design/icons').RetweetOutlined
   const Route: typeof import('react-router-dom').Route
   const Routes: typeof import('react-router-dom').Routes
@@ -55,6 +56,7 @@ declare global {
   const ShoppingCartOutlined: typeof import('@ant-design/icons').ShoppingCartOutlined
   const Space: typeof import('antd').Space
   const Spin: typeof import('antd').Spin
+  const SplitCellsOutlined: typeof import('@ant-design/icons').SplitCellsOutlined
   const StarOutlined: typeof import('@ant-design/icons').StarOutlined
   const Statistic: typeof import('antd').Statistic
   const Suspense: typeof import('react').Suspense
@@ -62,10 +64,11 @@ declare global {
   const Switch: typeof import('antd').Switch
   const Table: typeof import('antd').Table
   const Tag: typeof import('antd').Tag
+  const TeamOutlined: typeof import('@ant-design/icons').TeamOutlined
   const ThunderboltOutlined: typeof import('@ant-design/icons').ThunderboltOutlined
   const ToolOutlined: typeof import('@ant-design/icons').ToolOutlined
   const Typography: typeof import('antd').Typography
-  const UndoOutlined: typeof import('@ant-design/icons').UndoOutlined
+  const UnorderedListOutlined: typeof import('@ant-design/icons').UnorderedListOutlined
   const UserOutlined: typeof import('@ant-design/icons').UserOutlined
   const cache: typeof import('react').cache
   const cacheSignal: typeof import('react').cacheSignal

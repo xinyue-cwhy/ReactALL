@@ -69,38 +69,38 @@
 | — | 自定义 Hook 封装（useFetch / useLocalStorage 等） | ✅ |
 | — | useTransition / useDeferredValue 并发渲染 | ✅ |
 
-### 阶段三：性能优化（待完成）
+### 阶段三：性能优化（已完成）
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
-| — | React.memo + useMemo + useCallback 避免无效渲染 | ⬜ |
-| — | 渲染次数可视化（为什么重渲染 / 如何止损） | ⬜ |
-| — | lazy + Suspense 路由级代码分割 | ⬜ |
-| — | 虚拟列表（react-virtual 处理万级数据） | ⬜ |
+| — | React.memo + useMemo + useCallback 避免无效渲染 | ✅ |
+| — | 渲染次数可视化（为什么重渲染 / 如何止损） | ✅ |
+| — | lazy + Suspense 路由级代码分割 | ✅ |
+| — | 虚拟列表（react-virtual 处理万级数据） | ✅ |
 
 ### 阶段四：路由进阶（待完成）
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
-| — | React Router v7 嵌套路由 / 动态路由 / 404 | ⬜ |
-| — | loader / action 数据路由模式 | ⬜ |
-| — | 路由守卫（鉴权跳转） | ⬜ |
-| — | useNavigate / useSearchParams / useLocation | ⬜ |
+| — | React Router v7 嵌套路由 / 动态路由 / 404 | ✅ |
+| — | loader / action 数据路由模式 | ✅ |
+| — | 路由守卫（鉴权跳转） | ✅ |
+| — | useNavigate / useSearchParams / useLocation | ✅ |
 
-### 阶段五：状态管理（部分完成）
+### 阶段五：状态管理（已完成）
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
-| ReduxDemo | createSlice、createAsyncThunk、useSelector、useDispatch | ⬜ |
+| ReduxDemo | createSlice、createAsyncThunk、useSelector、useDispatch | ✅ |
 | ZustandDemo | create、persist 中间件、selector 精确订阅 | ✅ |
 
-### 阶段六：数据请求（待完成）
+### 阶段六：数据请求（已完成）
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
-| QueryDemo | useQuery 依赖查询、staleTime 缓存、手动 refetch | ⬜ |
-| — | useMutation 增删改、乐观更新、invalidateQueries | ⬜ |
-| — | useInfiniteQuery 无限滚动 | ⬜ |
+| QueryDemo | useQuery 依赖查询、staleTime 缓存、手动 refetch | ✅ |
+| — | useMutation 增删改、乐观更新、invalidateQueries | ✅ |
+| — | useInfiniteQuery 无限滚动 | ✅ |
 
 ### 阶段七：React 19 新特性（待完成）
 
@@ -115,9 +115,9 @@
 
 | Demo | 核心知识点 | 状态 |
 |------|-----------|------|
-| — | Error Boundary 错误边界 | ⬜ |
-| — | Vitest + Testing Library 单元测试 | ⬜ |
-| — | Vite 构建优化（分包、预构建） | ⬜ |
+| — | Error Boundary 错误边界 | ✅|
+| — | Vitest + Testing Library 单元测试 | ✅ |
+| — | Vite 构建优化（分包、预构建） | ✅ |
 
 ### 番外：React Fiber 原理（独立学习路线）
 

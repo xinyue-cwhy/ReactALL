@@ -101,6 +101,53 @@ const categories = [
         desc: '用 React.memo 跳过子组件无效渲染，用 useCallback 稳定回调引用，用 useMemo 缓存昂贵计算。',
         tags: ['React.memo', 'useMemo', 'useCallback'],
         color: '#f6ffed'
+      },
+      {
+        key: '/demo/render',
+        icon: <ReloadOutlined style={{ fontSize: 32, color: '#389e0d' }} />,
+        title: '渲染可视化',
+        desc: '4 个重渲染根本原因逐一拆解：state 变化、props 引用陷阱、Context 变化、state 位置过高。',
+        tags: ['重渲染', 'memo', 'Context 拆分'],
+        color: '#f6ffed'
+      },
+      {
+        key: '/demo/lazy',
+        icon: <SplitCellsOutlined style={{ fontSize: 32, color: '#389e0d' }} />,
+        title: 'lazy + Suspense 代码分割',
+        desc: '用 React.lazy 将路由/组件打包成独立 chunk，按需加载减少首屏体积，Suspense 展示加载占位。',
+        tags: ['React.lazy', 'Suspense', 'code splitting'],
+        color: '#f6ffed'
+      },
+      {
+        key: '/demo/virtual',
+        icon: <UnorderedListOutlined style={{ fontSize: 32, color: '#389e0d' }} />,
+        title: '虚拟列表',
+        desc: '只渲染可见区域内的行，DOM 节点数始终保持极少量，轻松处理万级数据不卡顿。',
+        tags: ['useVirtualizer', 'overscan', '按需渲染'],
+        color: '#f6ffed'
+      }
+    ]
+  },
+  {
+    label: '路由进阶',
+    color: '#1677ff',
+    icon: <BranchesOutlined />,
+    demos: [
+      {
+        key: '/demo/loader',
+        icon: <CloudDownloadOutlined style={{ fontSize: 32, color: '#1677ff' }} />,
+        title: 'loader / action',
+        desc: '路由级数据加载（loader）和表单提交（action），组件渲染时数据已就绪，无需管理 loading 状态。',
+        tags: ['loader', 'action', 'useLoaderData', 'Form'],
+        color: '#e6f4ff'
+      },
+      {
+        key: '/demo/router/users',
+        icon: <BranchesOutlined style={{ fontSize: 32, color: '#1677ff' }} />,
+        title: '嵌套 / 动态路由',
+        desc: '嵌套路由（Outlet）、动态路由（:id）、useNavigate、useSearchParams、useLocation、useParams。',
+        tags: ['Outlet', 'useParams', 'useSearchParams', 'useNavigate'],
+        color: '#e6f4ff'
       }
     ]
   },
@@ -141,6 +188,36 @@ const categories = [
         desc: '使用 TanStack Query 管理服务端状态，配合 Axios 拦截器处理请求。',
         tags: ['useQuery', 'useMutation', 'axios'],
         color: '#fff1f0'
+      }
+    ]
+  },
+  {
+    label: '复杂表单',
+    color: '#c41d7f',
+    icon: <ToolOutlined />,
+    demos: [
+      {
+        key: '/demo/booking-form',
+        icon: <ToolOutlined style={{ fontSize: 32, color: '#c41d7f' }} />,
+        title: '酒店预订单',
+        desc: '多房间动态增删、房型→房间级联、日期联动计算房晚、增值服务叠加计价、支付方式条件校验、服务端房态冲突校验。',
+        tags: ['动态增删行', '级联选择', '条件校验', '冲突校验'],
+        color: '#fff0f6'
+      }
+    ]
+  },
+  {
+    label: '工程化',
+    color: '#08979c',
+    icon: <ToolOutlined />,
+    demos: [
+      {
+        key: '/demo/engineering',
+        icon: <ToolOutlined style={{ fontSize: 32, color: '#08979c' }} />,
+        title: '工程化',
+        desc: 'Error Boundary 错误边界、Vitest + Testing Library 单元测试、Vite 构建优化（分包、预构建）。',
+        tags: ['ErrorBoundary', 'Vitest', 'manualChunks'],
+        color: '#e6fffb'
       }
     ]
   },

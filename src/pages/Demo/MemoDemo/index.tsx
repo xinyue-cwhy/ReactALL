@@ -11,13 +11,7 @@ function useRenderCount(): number {
   return count.current
 }
 
-function RenderTag({
-  count,
-  warn = false
-}: {
-  count: number
-  warn?: boolean
-}) {
+function RenderTag({ count, warn = false }: { count: number; warn?: boolean }) {
   const color = count <= 2 ? 'green' : warn ? 'red' : 'orange'
   return <Tag color={color}>渲染 {count} 次</Tag>
 }
@@ -81,15 +75,17 @@ const MemoBasicDemo: React.FC = () => {
       style={{ borderRadius: 8 }}
     >
       <Paragraph type="secondary" style={{ marginBottom: 12 }}>
-        父组件有两个状态：计数器 和 name。子组件只接收 name。
-        点「计数器 +1」时 name 未变，看哪个子组件会跟着重渲染。
+        父组件有两个状态：计数器 和 name。子组件只接收 name。 点「计数器 +1」时
+        name 未变，看哪个子组件会跟着重渲染。
       </Paragraph>
 
       <Space style={{ marginBottom: 12 }}>
-        <Button onClick={() => setCount(c => c + 1)}>
+        <Button onClick={() => setCount((c) => c + 1)}>
           计数器 +1（当前: {count}）
         </Button>
-        <Button onClick={() => setName(n => (n === 'Alice' ? 'Bob' : 'Alice'))}>
+        <Button
+          onClick={() => setName((n) => (n === 'Alice' ? 'Bob' : 'Alice'))}
+        >
           切换 name（当前: {name}）
         </Button>
       </Space>
@@ -108,8 +104,9 @@ const MemoBasicDemo: React.FC = () => {
             <Text strong>结论：</Text>
             memo 对 props 做浅比较，name 未变时跳过渲染。切换 name
             时两者都会渲染。
-            <Text strong> 浅比较</Text>意味着对象/数组每次新建会被认为"变化了"——这正是
-            useCallback / useMemo 存在的原因。
+            <Text strong> 浅比较</Text>
+            意味着对象/数组每次新建会被认为"变化了"——这正是 useCallback /
+            useMemo 存在的原因。
           </Text>
         }
       />
@@ -155,11 +152,11 @@ const CallbackDemo: React.FC = () => {
 
   // 每次渲染都创建新函数引用 → memo 浅比较失败 → 子组件重渲染
   const handlerWithout = () =>
-    setLog(prev => [...prev, `无 useCallback，父计数 ${count}`])
+    setLog((prev) => [...prev, `无 useCallback，父计数 ${count}`])
 
   // useCallback 让引用保持稳定（依赖 count 变化才更新）→ memo 生效
   const handlerWith = useCallback(
-    () => setLog(prev => [...prev, `有 useCallback，父计数 ${count}`]),
+    () => setLog((prev) => [...prev, `有 useCallback，父计数 ${count}`]),
     [count]
   )
 
@@ -176,7 +173,7 @@ const CallbackDemo: React.FC = () => {
 
       <Button
         style={{ marginBottom: 12 }}
-        onClick={() => setCount(c => c + 1)}
+        onClick={() => setCount((c) => c + 1)}
       >
         父计数器 +1（当前: {count}）
       </Button>
@@ -237,7 +234,7 @@ function slowFilter(list: number[], threshold: number): number[] {
   while (performance.now() < end) {
     /* 故意阻塞 */
   }
-  return list.filter(n => n >= threshold).sort((a, b) => b - a)
+  return list.filter((n) => n >= threshold).sort((a, b) => b - a)
 }
 
 // 定义在组件外，引用稳定，不会成为 useMemo 的无效依赖
@@ -273,16 +270,16 @@ const UseMemoDemo: React.FC = () => {
       </Paragraph>
 
       <Space style={{ marginBottom: 12 }} wrap>
-        <Button onClick={() => setThreshold(t => Math.max(0, t - 10))}>
+        <Button onClick={() => setThreshold((t) => Math.max(0, t - 10))}>
           阈值 −10
         </Button>
         <Tag>阈值: {threshold}</Tag>
-        <Button onClick={() => setThreshold(t => Math.min(90, t + 10))}>
+        <Button onClick={() => setThreshold((t) => Math.min(90, t + 10))}>
           阈值 +10
         </Button>
         <Button
           type={darkMode ? 'primary' : 'default'}
-          onClick={() => setDarkMode(d => !d)}
+          onClick={() => setDarkMode((d) => !d)}
         >
           切换暗色（无关状态）
         </Button>
@@ -339,8 +336,8 @@ const UseMemoDemo: React.FC = () => {
         showIcon
         message={
           <Text style={{ fontSize: 12 }}>
-            <Text strong>结论：</Text>切换暗色时组件重渲染，
-            无 useMemo 的计算次数随之增加；有 useMemo 的计算次数只在 threshold
+            <Text strong>结论：</Text>切换暗色时组件重渲染， 无 useMemo
+            的计算次数随之增加；有 useMemo 的计算次数只在 threshold
             变化时增加，组件渲染次数相同。
             <br />
             <Text strong>注意：</Text>

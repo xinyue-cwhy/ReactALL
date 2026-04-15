@@ -72,6 +72,43 @@ const menuItems = [
         key: '/demo/memo',
         icon: <StarOutlined />,
         label: 'memo / useMemo / useCallback'
+      },
+      {
+        key: '/demo/render',
+        icon: <ReloadOutlined />,
+        label: '渲染可视化'
+      },
+      {
+        key: '/demo/lazy',
+        icon: <SplitCellsOutlined />,
+        label: 'lazy + Suspense 代码分割'
+      },
+      {
+        key: '/demo/virtual',
+        icon: <UnorderedListOutlined />,
+        label: '虚拟列表'
+      }
+    ]
+  },
+  {
+    key: 'router',
+    icon: <BranchesOutlined />,
+    label: '路由进阶',
+    children: [
+      {
+        key: '/demo/router/users',
+        icon: <TeamOutlined />,
+        label: '嵌套 / 动态路由'
+      },
+      {
+        key: '/demo/loader',
+        icon: <CloudDownloadOutlined />,
+        label: 'loader / action'
+      },
+      {
+        key: '/demo/router/guard',
+        icon: <EyeInvisibleOutlined />,
+        label: '路由守卫'
       }
     ]
   },
@@ -115,6 +152,18 @@ const menuItems = [
         label: 'React Suspense'
       }
     ]
+  },
+  {
+    key: 'complex-form',
+    icon: <ToolOutlined />,
+    label: '复杂表单',
+    children: [
+      {
+        key: '/demo/booking-form',
+        icon: <ToolOutlined />,
+        label: '酒店预订单'
+      }
+    ]
   }
 ]
 
@@ -133,7 +182,17 @@ const breadcrumbMap: Record<string, string> = {
   '/demo/reducer': 'useReducer 复杂状态',
   '/demo/custom-hook': '自定义 Hook',
   '/demo/concurrent': '并发渲染',
-  '/demo/memo': '性能优化 memo'
+  '/demo/memo': '性能优化 memo',
+  '/demo/render': '渲染可视化',
+  '/demo/lazy': 'lazy + Suspense 代码分割',
+  '/demo/virtual': '虚拟列表',
+  '/demo/router/users': '嵌套 / 动态路由',
+  '/demo/router/settings': '嵌套 / 动态路由',
+  '/demo/loader': 'loader / action',
+  '/demo/router/guard': '路由守卫',
+  '/demo/router/login': '路由守卫 · 登录',
+  '/demo/router/protected': '路由守卫 · 受保护页面',
+  '/demo/booking-form': '酒店预订单'
 }
 
 const AppLayout: React.FC = () => {
@@ -207,9 +266,11 @@ const AppLayout: React.FC = () => {
                 'communication',
                 'hooks',
                 'perf',
+                'router',
                 'state',
                 'data',
-                'react19'
+                'react19',
+                'complex-form'
               ]}
               items={menuItems.slice(1)}
               onClick={({ key }) => navigate(key)}
